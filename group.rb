@@ -73,17 +73,17 @@ class Group
 			index -= 1 if index >= 0
 			normal_vertex = object.normals[index]
 			@normal_list[3 * i] = normal_vertex.x
-	    	@normal_list[3 * i + 1] = normal_vertex.y
-	    	@normal_list[3 * i + 2] = normal_vertex.z
-	    end
-
-	    # Cargar las coordenadas de texture (s, t) si es que existen
-	    if (object.texture_coordinates.size > 0)
-	    	index = triangle.vertices[vertex].texture_index
+	    @normal_list[3 * i + 1] = normal_vertex.y
+	    @normal_list[3 * i + 2] = normal_vertex.z
+		end
+	    
+		# Cargar las coordenadas de texture (s, t) si es que existen
+		if (object.texture_coordinates.size > 0)
+	    index = triangle.vertices[vertex].texture_index
 			index -= 1 if index >= 0
 			texture_vertex = object.texture_coordinates[index]
 			@texture_vertex_list[2 * i] = texture_vertex.x
-	    	@texture_vertex_list[2 * i + 1] = texture_vertex.y
-	    end
+	    @texture_vertex_list[2 * i + 1] = texture_vertex.y
+		end
 	end
 end
