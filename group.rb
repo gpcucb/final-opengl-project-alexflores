@@ -1,10 +1,5 @@
 class Group
-	attr_accessor :vertex_list
-	attr_accessor :normal_list
-	attr_accessor :texture_vertex_list
-	attr_accessor :index_list
-	attr_accessor :size
-	attr_accessor :material
+	attr_accessor :vertex_list, :normal_list, :texture_vertex_list, :index_list, :size, :material
 
 	def initialize(group, object)
 		triangles = group.triangles
@@ -60,7 +55,6 @@ class Group
 		# Existen modelos que definen sus indices de forma negativa
 		# En estos casos se deja tal cual, en el caso de que sea 
 		# mayor a 0 se resta 1
-		# (Ahora ya no habra el problema de cargar los models)
 		index -= 1 if index >= 0
 		v = object.vertices[index]
 		@vertex_list[3 * i] = v.x

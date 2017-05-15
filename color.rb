@@ -1,8 +1,5 @@
-# una clase simple para manejar colores
 class Color
-	attr_accessor :red
-	attr_accessor :green
-	attr_accessor :blue
+	attr_accessor :red, :green, :blue
 
 	def initialize
 		@red = 1.0

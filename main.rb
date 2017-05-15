@@ -10,14 +10,13 @@ include Gl
 include Glu
 include Glut
 
-FPS = 60.freeze
+FPS = 50.freeze
 DELAY_TIME = (1000.0 / FPS)
 DELAY_TIME.freeze
 
 def load_objects
   puts "Loading model"
-  @model = Model.new('saturn', 'saturn.mtl')
-  #@model = Model.new('planet', 'planet.mtl')
+  @model = Model.new('planet', 'planet.mtl')
   puts "model loaded"
 end
 
@@ -46,14 +45,12 @@ def draw
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
   glPushMatrix
-  
-  glTranslate(0.0, 0.0, 0.0)
-  glRotatef(@spin_ven, 0.0, 1.0, 0.0)
-  glScalef(20.0, 20.0, 20.0)
-  
-  @model.draw
-  
+    glTranslate(0.0, -40.0, 0.0)
+    glRotatef(@spin_ven, 0.0, 1.0, 0.0)
+    glScalef(20.0, 20.0, 20.0)
+    @model.draw
   glPopMatrix
+
   glutSwapBuffers
 end
 
@@ -69,7 +66,7 @@ end
 
 def idle
   @spin = @spin + 0.1
-  @spin_ven = @spin_ven + 360.0/1832.0#360.0/224.0#
+  @spin_ven = @spin_ven + 360.0/360.0
 
   if @spin > 360.0
     @spin = @spin - 360.0

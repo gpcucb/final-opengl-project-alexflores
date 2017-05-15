@@ -1,15 +1,7 @@
-# defino una clase material con los datos necesarios
 require_relative 'color'
 
 class Material
-	attr_accessor :name
-	attr_accessor :diffuse
-	attr_accessor :specular
-	attr_accessor :shininess
-	attr_accessor :texture
-	attr_accessor :texture_image
-	attr_accessor :texture_width
-	attr_accessor :texture_height
+	attr_accessor :name, :diffuse, :specular, :shininess, :texture, :texture_image, :texture_width, :texture_height
 
 	def initialize(name)
 		@name = name

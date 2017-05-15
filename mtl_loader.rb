@@ -1,4 +1,4 @@
-# Esta clase lee un archivo de tipo mtl, no la toquen!
+# Esta clase lee un archivo de tipo mtl
 require_relative 'material'
 
 class MtlLoader
@@ -45,7 +45,6 @@ class MtlLoader
     color.red = line[1].to_f
     color.green = line[2].to_f
     color.blue = line[3].to_f
-
     color
   end
 
