@@ -16,13 +16,20 @@ DELAY_TIME.freeze
 
 def load_objects
   puts "Loading model"
-  @model = Model.new('obj/Sonic', 'obj/Sonic.mtl')
+  @model = Model.new('obj/lego_man', 'obj/lego_man.mtl')
   puts "model loaded"
 end
 
 def initGL
+  glDepthFunc(GL_LEQUAL)
   glEnable(GL_DEPTH_TEST)
+  glClearDepth(1.0)
+  
   glClearColor(0.0, 0.0, 0.0, 0.0)
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+  glEnable(GL_LIGHTING)
+  glEnable(GL_LIGHT0)
   glEnable(GL_COLOR_MATERIAL)
   glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
   glEnable(GL_NORMALIZE)
@@ -30,12 +37,13 @@ def initGL
   glEnable(GL_CULL_FACE)
   glCullFace(GL_BACK)
 
-  position = [0.0, 50.0, 0.0]
-  color = [1.0, 1.0, 1.0, 1.0]
-  ambient = [0.2, 0.2, 0.2, 1.0]
-  glLightfv(GL_LIGHT0, GL_POSITION, position)
-  glLightfv(GL_LIGHT0, GL_DIFFUSE, color)
-  glLightfv(GL_LIGHT0, GL_SPECULAR, color)
+  light_position = [0.0, 50.0, 100.0]
+  light_color = [1.0, 1.0, 1.0, 1.0]
+  specular = [1.0, 1.0, 1.0, 0.0]
+  ambient = [0.15, 0.15, 0.15, 1.0]
+  glLightfv(GL_LIGHT0, GL_POSITION, light_position)
+  glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color)
+  glLightfv(GL_LIGHT0, GL_SPECULAR, specular)
   glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient)
 end
 
@@ -45,9 +53,9 @@ def draw
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
   glPushMatrix
-    glTranslate(0.0, -30.0, 0.0)
+    glTranslate(0.0, -40.0, 0.0)
     glRotatef(@spin, 0.0, 1.0, 0.0)
-    glScalef(2.0, 2.0, 2.0)
+    glScalef(15.0, 15.0, 15.0)
     @model.draw
   glPopMatrix
 
@@ -61,7 +69,7 @@ def reshape(width, height)
   gluPerspective(45, (1.0 * width) / height, 0.001, 1000.0)
   glMatrixMode(GL_MODELVIEW)
   glLoadIdentity()
-  gluLookAt(0.0, 50.0, -125.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)
+  gluLookAt(0.0, 50.0, 125.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)
 end
 
 def idle
@@ -99,7 +107,7 @@ end
 
 load_objects
 glutInit
-glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH)
+glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
 glutInitWindowSize(800,600)
 glutInitWindowPosition(10,10)
 glutCreateWindow("Hola OpenGL, en Ruby")
