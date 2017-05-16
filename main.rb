@@ -10,13 +10,13 @@ include Gl
 include Glu
 include Glut
 
-FPS = 50.freeze
+FPS = 60.freeze
 DELAY_TIME = (1000.0 / FPS)
 DELAY_TIME.freeze
 
 def load_objects
   puts "Loading model"
-  @model = Model.new('planet', 'planet.mtl')
+  @model = Model.new('obj/Sonic', 'obj/Sonic.mtl')
   puts "model loaded"
 end
 
@@ -45,9 +45,9 @@ def draw
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
   glPushMatrix
-    glTranslate(0.0, -40.0, 0.0)
-    glRotatef(@spin_ven, 0.0, 1.0, 0.0)
-    glScalef(20.0, 20.0, 20.0)
+    glTranslate(0.0, -30.0, 0.0)
+    glRotatef(@spin, 0.0, 1.0, 0.0)
+    glScalef(2.0, 2.0, 2.0)
     @model.draw
   glPopMatrix
 
@@ -65,12 +65,10 @@ def reshape(width, height)
 end
 
 def idle
-  @spin = @spin + 0.1
-  @spin_ven = @spin_ven + 360.0/360.0
+  @spin = @spin + 1
 
   if @spin > 360.0
     @spin = @spin - 360.0
-    @spin_ven = @spin_ven - 360.0
   end
 
   @frame_time = glutGet(GLUT_ELAPSED_TIME) - @frame_start
@@ -98,8 +96,6 @@ end
 @spin = 0.0
 @previous_time = 0
 @frame_count = 0
-
-@spin_ven = 0.0
 
 load_objects
 glutInit
